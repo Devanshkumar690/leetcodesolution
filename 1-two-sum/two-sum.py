@@ -1,16 +1,11 @@
 class Solution(object):
     def twoSum(self, nums, target):
-        arr = [(nums[i], i) for i in range(len(nums))]
-        arr.sort()
+        mp = {}
 
-        l, r = 0, len(nums) - 1
+        for i in range(len(nums)):
+            diff = target - nums[i]
 
-        while l < r:
-            s = arr[l][0] + arr[r][0]
+            if diff in mp:
+                return [mp[diff], i]
 
-            if s == target:
-                return [arr[l][1], arr[r][1]]
-            elif s < target:
-                l += 1
-            else:
-                r -= 1
+            mp[nums[i]] = i
