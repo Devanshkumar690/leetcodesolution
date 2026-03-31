@@ -1,11 +1,28 @@
 class Solution(object):
     def twoSum(self, nums, target):
-        mp = {}
+        d = {i: val for i, val in enumerate(nums)} 
+        
+        arr = sorted(nums)  
+        l, r = 0, len(arr) - 1
+        lt = []
 
-        for i in range(len(nums)):
-            diff = target - nums[i]
+        while l < r:
+            s = arr[l] + arr[r]
 
-            if diff in mp:
-                return [mp[diff], i]
+            if s == target:
+                lt = [arr[l], arr[r]]
+                break
+            elif s < target:
+                l += 1
+            else:
+                r -= 1
 
-            mp[nums[i]] = i
+      
+        result = []
+        for val in lt:
+            for k, v in d.items():
+                if v == val and k not in result:
+                    result.append(k)
+                    break
+
+        return result
