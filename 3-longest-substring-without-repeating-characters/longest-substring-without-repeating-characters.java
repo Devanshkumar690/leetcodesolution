@@ -10,11 +10,10 @@ class Solution {
 
         for (int high = 0; high < s.length(); high++) {
 
-            char ch = s.charAt(high);
-            map.put(ch, map.getOrDefault(ch, 0) + 1);
+            map.put(s.charAt(high), map.getOrDefault(s.charAt(high), 0) + 1);
 
            
-            while (map.get(ch) > 1) {
+            while (map.get(s.charAt(high)) > 1) {
 
                 char left = s.charAt(low);
 
