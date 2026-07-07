@@ -1,28 +1,11 @@
-class Solution(object):
-    def twoSum(self, nums, target):
-        d = {i: val for i, val in enumerate(nums)} 
-        
-        arr = sorted(nums)  
-        l, r = 0, len(arr) - 1
-        lt = []
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        my = {}
 
-        while l < r:
-            s = arr[l] + arr[r]
+        for i in range(len(nums)):
+            diff = target - nums[i]
 
-            if s == target:
-                lt = [arr[l], arr[r]]
-                break
-            elif s < target:
-                l += 1
-            else:
-                r -= 1
+            if diff in my:
+                return [my[diff], i]
 
-      
-        result = []
-        for val in lt:
-            for k, v in d.items():
-                if v == val and k not in result:
-                    result.append(k)
-                    break
-
-        return result
+            my[nums[i]] = i
