@@ -1,41 +1,55 @@
 class Solution {
-    public boolean valid(int[] freqs,int[] freqt){
-            for(int i=0;i<128;i++){
-                if(freqs[i]<freqt[i]){
-                    return false;
-                }
-            }
-            return true;
-    }
     public String minWindow(String s, String t) {
 
         if (s.length() < t.length()) return "";
 
-        int[] freqt = new int[128];
-        for(int i=0;i<t.length();i++){
-            freqt[t.charAt(i)]++;
+        int[] freq = new int[128];
+
+       
+        for (char ch : t.toCharArray()) {
+            freq[ch]++;
         }
-        int low=0;
-        int res= Integer.MAX_VALUE;
-        int[] freqs = new int[128];
-        int start=0;
-        for(int high =0;high<s.length();high++){
-            freqs[s.charAt(high)]++;
 
-            while(valid(freqs,freqt)){
-                int len =high-low+1;
+        int low = 0;
+        int start = 0;
+        int minLen = Integer.MAX_VALUE;
 
-                if(res>len){
-                    res=len;
+        int required = t.length();
+
+        for (int high = 0; high < s.length(); high++) {
+
+            char right = s.charAt(high);
+
+          
+            if (freq[right] > 0) {
+                required--;
+            }
+
+            freq[right]--;
+
+    
+            while (required == 0) {
+
+                if (high - low + 1 < minLen) {
+                    minLen = high - low + 1;
                     start = low;
                 }
-                freqs[s.charAt(low)]--;
+
+                char left = s.charAt(low);
+
+                freq[left]++;
+
+       
+                if (freq[left] > 0) {
+                    required++;
+                }
+
                 low++;
             }
         }
-        return res == Integer.MAX_VALUE
-                ?""
-                :s.substring(start,start +res);
-        
+
+        return minLen == Integer.MAX_VALUE
+                ? ""
+                : s.substring(start, start + minLen);
     }
 }
