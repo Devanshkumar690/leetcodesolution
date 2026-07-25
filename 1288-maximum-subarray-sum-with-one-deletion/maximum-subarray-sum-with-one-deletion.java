@@ -9,10 +9,11 @@ class Solution {
             int prevone_del=one_del;
 
             no_del=Math.max(no_del+curr,curr);
-            int v2 = (prevone_del == Integer.MIN_VALUE)
-                        ? Integer.MIN_VALUE
-                        : prevone_del + arr[i];
-            one_del=Math.max(v2,prevno_del);
+            
+            one_del=Math.max(
+                (prevone_del == Integer.MIN_VALUE)
+                ? Integer.MIN_VALUE
+                : prevone_del + arr[i],prevno_del);
             
             res = Math.max(res,Math.max(no_del,one_del));
         }
