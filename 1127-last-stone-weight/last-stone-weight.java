@@ -16,9 +16,7 @@ class Solution {
                 pq.add(diff);
             }
         }
-        if(pq.isEmpty()){
-            return 0;
-        }
-        return pq.peek();
+      
+        return pq.isEmpty() ? 0 : pq.peek();
     }
 }
