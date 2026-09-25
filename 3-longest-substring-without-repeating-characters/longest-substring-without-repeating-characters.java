@@ -15,11 +15,9 @@ class Solution {
 
                 char left = s.charAt(low);
 
-                if (map.get(left) == 1) {
-                    map.remove(left);
-                } else {
-                    map.put(left, map.get(left) - 1);
-                }
+               
+                map.put(left, map.get(left) - 1);
+                
 
                 low++;
             }
