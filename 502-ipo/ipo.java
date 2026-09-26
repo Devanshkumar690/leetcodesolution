@@ -28,8 +28,7 @@ class Solution {
             if(pq.isEmpty()){
                 return w;
             }
-            int max= pq.poll();
-            w += max;
+            w += pq.poll();
             k--;
         }
         return w;
