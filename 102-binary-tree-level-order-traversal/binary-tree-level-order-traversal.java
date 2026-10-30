@@ -56,7 +56,7 @@ class Solution {
 
     public List<List<Integer>> levelOrder(TreeNode root) {
         
-        Queue<TreeNode> q = new ArrayDeque<>();
+        Queue<TreeNode> q = new LinkedList<>();
 
       
 
