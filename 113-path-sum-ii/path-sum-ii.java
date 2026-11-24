@@ -14,27 +14,25 @@
  * }
  */
 class Solution {
-    List<Integer> dairy = new ArrayList<>();
+   
 
-    List<List<Integer>> ans = new ArrayList<>();
-
-    public void fun(TreeNode root , int sum , List<Integer> dairy , int tSum, List<List<Integer>> ans){
+    public void fun(TreeNode root ,List<Integer> dairy , int tSum, List<List<Integer>> ans){
         if(root == null){
             return;
         }
 
-        sum = sum + root.val;
+        tSum -= root.val;
 
         dairy.add(root.val);
 
         if(root.left == null && root.right == null){
-            if(sum == tSum){
+            if(tSum == 0){
                 ans.add(new ArrayList<>(dairy));
            
             }
         }
-        fun(root.left,sum,dairy,tSum,ans);
-        fun(root.right,sum,dairy,tSum,ans);
+        fun(root.left,dairy,tSum,ans);
+        fun(root.right,dairy,tSum,ans);
         dairy.remove(dairy.size()-1);
 
         return;
@@ -42,11 +40,11 @@ class Solution {
 
     public List<List<Integer>> pathSum(TreeNode root, int targetSum){
         
-       dairy = new ArrayList<>();
+        List<Integer> dairy = new ArrayList<>();
 
-       ans = new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
 
-       fun(root,0,dairy,targetSum,ans);
+       fun(root,dairy,targetSum,ans);
 
        return ans;
     }
