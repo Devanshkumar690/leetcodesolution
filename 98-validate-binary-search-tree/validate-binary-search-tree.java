@@ -15,21 +15,17 @@
  */
 class Solution {
     TreeNode prev = null;
-    Boolean ans = true;
+    boolean ans = true;
 
     public void fun(TreeNode root){
-        if(root == null){
+        if(root == null || !ans){
             return;
         }
 
         fun(root.left);
 
         //logic
-        if(root == null){
-            return;
-        }
-       
-
+        
         if(prev!=null && prev.val >= root.val ){
             ans = false;
             return;
@@ -40,6 +36,7 @@ class Solution {
     }
     public boolean isValidBST(TreeNode root) {
         prev = null;
+        ans = true;
 
         fun(root);
 
