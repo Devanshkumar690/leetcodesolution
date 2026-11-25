@@ -13,72 +13,41 @@
  *     }
  * }
  */
+
 class Solution {
     TreeNode prev = null;
+    TreeNode first = null;
+    TreeNode second = null;
 
-    int wrong = 0;
-
-    TreeNode g1First = null;
-    TreeNode g1Second = null;
-
-    TreeNode g2First = null;
-    TreeNode g2Second = null;
-
-    public void fun(TreeNode root){
-        if(root == null){
+    public void fun(TreeNode root) {
+        if (root == null) {
             return;
         }
+
         fun(root.left);
 
-        //logic
-
-        if(prev == null){
-            prev = root;
-        }
-        else{
-            if(root.val < prev.val){
-                if(wrong == 0){
-                    g1First = prev;
-                    g1Second = root;
-                    wrong++;
-                }
-                else{
-                    g2First = prev;
-                    g2Second = root;
-                    wrong++;
-                }
+        if (prev != null && root.val < prev.val) {
+            if (first == null) {
+                first = prev;
             }
-            
-            prev = root;
+
+            second = root;
         }
+
+        prev = root;
 
         fun(root.right);
-
-
     }
 
     public void recoverTree(TreeNode root) {
         prev = null;
-
-        wrong = 0;
-
-        g1First = null;
-        g1Second = null;
-
-        g2First = null;
-        g2Second = null;
-
+        first = null;
+        second = null;
 
         fun(root);
-        if(wrong == 1){
-            int temp = g1First.val;
-            g1First.val = g1Second.val;
-            g1Second.val = temp;
-        }
-        else{
-            int temp = g1First.val;
-            g1First.val = g2Second.val;
-            g2Second.val = temp;
-        }
+
+        int temp = first.val;
+        first.val = second.val;
+        second.val = temp;
     }
 }
